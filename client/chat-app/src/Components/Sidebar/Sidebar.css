@@ -1,0 +1,40 @@
+.Sidebar {
+    background-color: aliceblue;
+    flex: 0.3;
+    display: flex;
+    flex-direction: column;
+}
+
+.SidebarHeader {
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 5px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.SidebarSearch {
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.SidebarSearch input {
+    border: none;
+    margin-left: 10px;
+    font-size: 1.25rem;
+    outline-width: 0;
+}
+
+.SidebarConversations {
+    background-color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin: 10px;
+    flex: 1;
+}
