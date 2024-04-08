@@ -1,0 +1,20 @@
+.MessageSelfContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+.SelfMessageBox {
+    background-color: #63d7b0;
+    min-width: min-content;
+    max-width: 300px;
+    width: auto;
+    padding: 10px 10px;
+    margin: 5px;
+    border-radius: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.SelfTimeStamp {
+    font-size: 0.65rem;
+    text-align: end;
+    color: rgba(0, 0, 0, 0.54);
+}

@@ -7,8 +7,26 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import SearchIcon from '@mui/icons-material/Search';
 import ConversationItem from "../ConversationItem";
+import { useState } from "react";
 
 export default function Sidebar () {
+    let [conversations, setConversations] = useState([
+        {
+            name: "Name 1",
+            lastMessage: "LastMessage1",
+            timeStamp: "today",
+        },
+        {
+            name: "Name 2",
+            lastMessage: "LastMessage2",
+            timeStamp: "today",
+        },
+        {
+            name: "Name 3",
+            lastMessage: "LastMessage3",
+            timeStamp: "today",
+        }
+    ])
     return (
         <div className="Sidebar">
             <div className="SidebarHeader">
@@ -42,7 +60,18 @@ export default function Sidebar () {
                 </IconButton>
             </div>
             <div className="SidebarConversations">
-                <ConversationItem/>
+                {conversations.map((conversation, i)=>{
+                    return(<ConversationItem props={conversation} key={i}/>)
+                })}
+                {conversations.map((conversation, i)=>{
+                    return(<ConversationItem props={conversation} key={i}/>)
+                })}
+                {conversations.map((conversation, i)=>{
+                    return(<ConversationItem props={conversation} key={i}/>)
+                })}
+                {conversations.map((conversation, i)=>{
+                    return(<ConversationItem props={conversation} key={i}/>)
+                })}
             </div>
         </div>
     )

@@ -1,11 +1,11 @@
 import Sidebar from "../Sidebar/Sidebar.jsx"
-import WorkArea from "../WorkArea/WorkArea"
+import ChatArea from "../ChatArea/ChatArea"
 import "./MainContainer.css"
 export default function MainContainer () {
     return(
-        <div className="MainContainer">
+        <div className="MainContainer" >
             <Sidebar/>
-            <WorkArea/>
+            <ChatArea/>
         </div>
     )
 }

@@ -1,0 +1,68 @@
+.ChatArea {
+    flex: 0.7;
+    display: flex;
+    /* background-color: white; */
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+.ChatAreaHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: white;
+    padding: 10px 10px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.HeaderText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+}
+
+.MessageArea {
+    flex: 1;
+    padding: 10px 10px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.MessageContainer {
+    background-color: white;
+    border-radius: 20px;
+    height: 100%;
+    margin-right: 10px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.900) white;
+}
+
+.MessageContainer::-webkit-scrollbar {
+    display: none;
+} 
+
+.TextInputArea {
+    background-color: white;
+    padding: 10px 10px;
+    margin: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.SearchBox {
+    width: 100%;
+    outline-width: 0;
+    border: none;
+    margin-left: 10px;
+    font-size: 1.25rem;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.ConversationContainer {
+    display: flex;
+    justify-content: flex-end;
+}

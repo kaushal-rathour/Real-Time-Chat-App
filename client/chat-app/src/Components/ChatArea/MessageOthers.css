@@ -1,0 +1,33 @@
+.MessageOthersContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.OthersConversationContainer {
+    padding: 5px;
+    display: flex;
+}
+
+.ConversationMessage {
+    font-size: 1rem;
+}
+.OthersMessageBox {
+    margin-left: 5px;
+    padding: 8px 10px;
+    background-color: grey;
+    border-radius: 20px;
+    min-width: min-content;
+    max-width: 300px;
+    width: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.OthersTimeStamp {
+    font-size: 0.65rem;
+    text-align: end;
+    color: rgba(0, 0, 0, 0.54);
+}
