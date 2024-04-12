@@ -3,9 +3,18 @@
     grid-template-columns: 32px auto auto;
     grid-template-rows: auto auto;
     column-gap: 10px;
-    padding: 5px;
+    padding: 10px;
     margin: 5px;
     border-radius: 20px;
+    transition-duration: 0.5s;
+}
+
+.Conversation:hover {
+    background-color: #D9D9D9;
+}
+
+.Conversation:active {
+    background-color: white;
 }
 
 .ConversationIcon {

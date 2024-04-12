@@ -5,7 +5,7 @@
 .SelfMessageBox {
     background-color: #63d7b0;
     min-width: min-content;
-    max-width: 300px;
+    max-width: 90%;
     width: auto;
     padding: 10px 10px;
     margin: 5px;

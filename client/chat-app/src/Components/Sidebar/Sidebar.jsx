@@ -2,14 +2,17 @@ import { IconButton } from "@mui/material";
 import "./Sidebar.css"
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import AddCircleIcon from '@mui/icons-material/AddCircle'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import SearchIcon from '@mui/icons-material/Search';
 import ConversationItem from "../ConversationItem";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Sidebar () {
+    const navigate = useNavigate();
     let [conversations, setConversations] = useState([
         {
             name: "Name 1",
@@ -31,23 +34,29 @@ export default function Sidebar () {
         <div className="Sidebar">
             <div className="SidebarHeader">
                 <div className="SidebarHeaderLeft">
-                <IconButton>
-                <AccountCircleIcon/> 
-                </IconButton>
+                    
+                        <IconButton >
+                            <AccountCircleIcon/> 
+                        </IconButton>
+                    
                 </div>
                 <div className="SidebarHeaderRight">
-                <IconButton>
-                <PersonAddIcon/> 
-                </IconButton>
+                   
+                        <IconButton onClick ={()=>{navigate("/users")}} >
+                            <PersonAddIcon/> 
+                        </IconButton>
 
-                <IconButton>
-                <GroupAddIcon/> 
-                </IconButton>
+                    
+               
+                        <IconButton  onClick ={()=>{navigate("/groups")}}>
+                            <GroupAddIcon/> 
+                        </IconButton>
+                    
 
-                <IconButton>
-                <AccountCircleIcon/> 
+                    <IconButton onClick ={()=>{navigate("/groups/new")}}>
+                <AddCircleIcon/> 
                 </IconButton>
-
+                
                 <IconButton>
                 <NightlightIcon/> 
                 </IconButton>

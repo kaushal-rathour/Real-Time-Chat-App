@@ -1,0 +1,37 @@
+.CreateGroupsContainer {
+    flex: 0.7;
+    margin: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    justify-content: space-between;
+}
+
+.CreateGroupsTitle {
+    background-color: white;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 2rem;
+    font-weight: bolder;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.CreateGroupsInput {
+    margin: 100px 0 0 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    border-bottom: 5px solid rgb(9, 218, 255);
+}
+
+.CreateGroupsInput input {
+    font-size: 1rem;
+    padding: 1rem;
+}

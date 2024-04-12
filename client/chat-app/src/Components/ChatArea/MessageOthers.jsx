@@ -1,6 +1,6 @@
 import "./MessageOthers.css"
 export default function MessageOthers () {
-    let props = {name: "Kaushal Rathour", message: "This is a simple message by Kaushal Rathour Please Move To Next Line"}
+    let props = {name: "Kaushal Rathour", message: "This is a simple message by Kaushal Rathour Please Move To Next Line border-bottom: 5px solid rgb(9, 218, 255); border-bottom: 5px solid rgb(9, 218, 255); border-bottom: 5px solid rgb(9, 218, 255);"}
     return (
         <div className="MessageOthersContainer">
             <div className="OthersConversationContainer">

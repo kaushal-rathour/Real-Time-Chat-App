@@ -1,14 +1,29 @@
 import './App.css'
 import MainContainer from './Components/Main/MainContainer.jsx'
-function App() {
+import Login from './Components/Login'
+import { Routes, Route } from 'react-router-dom'
+import ChatArea from './Components/ChatArea/ChatArea'
+import User from './Components/User'
+import Welcome from './Components/Welcome'
+import Groups from './Components/Groups'
+import CreateGroups from './Components/CreateGroups'
+export default function App() {
 
   return (
     
       <div className="App">
-        <MainContainer/>
+        
+        <Routes>
+            <Route path = "/login" element={<Login/>}></Route>
+              <Route path="" element={<MainContainer/>}>
+                  <Route path="chat" element={<ChatArea/>}></Route>
+                  <Route path="users" element={<User/>}></Route>
+                  <Route path="groups" element={<Groups/>}></Route>
+                  <Route path="groups/new" element={<CreateGroups/>}></Route>
+                  <Route path="welcome" element={<Welcome/>}></Route>
+              </Route>
+        </Routes>
         </div>
     
   )
 }
-
-export default App
