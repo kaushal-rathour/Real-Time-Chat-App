@@ -4,17 +4,27 @@
     grid-template-rows: auto auto;
     column-gap: 10px;
     padding: 10px;
-    margin: 5px;
+    margin: 5px 0 5px 0;
     border-radius: 20px;
     transition-duration: 0.5s;
 }
 
+.Conversation.LightMode {
+    background-color: #f5f5f5 !important;
+    color: black !important;
+}
+
+.Conversation.DarkMode {
+    background-color: #333333 !important;
+    color: white !important;
+}
+
 .Conversation:hover {
-    background-color: #D9D9D9;
+    background-color: rgba(255, 255, 255, 0.726) !important;
 }
 
 .Conversation:active {
-    background-color: white;
+    background-color: #D9D9D9 !important;
 }
 
 .ConversationIcon {
@@ -37,14 +47,14 @@
 .ConversationTitle {
     grid-area: 1/2/2/4;
     font-weight: bold;
-    color: rgba(0, 0, 0, 0.54);
+    /* color: rgba(0, 0, 0, 0.54); */
 }
 
 .ConversationTime {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     justify-self: flex-end;
     font-size: 0.75rem;
-    color: rgba(0, 0, 0, 0.54);
+    /* color: rgba(0, 0, 0, 0.54); */
 }
 
 .ConversationLastMessage {

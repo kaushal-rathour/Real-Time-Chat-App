@@ -4,9 +4,8 @@
     flex-direction: column;
 }
 
-
 .UserGroupsHeader {
-    background-color: white;
+    /* background-color: white; */
     border-radius: 20px;
     padding: 12px 5px;
     margin: 10px;
@@ -16,7 +15,7 @@
 }
 
 .UserGroupsTitle {
-    color: rgba(0, 0, 0, 0.54);
+    /* color: rgba(0, 0, 0, 0.54); */
     margin-left: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bolder;
@@ -43,11 +42,29 @@
 .ListItem {
     display: flex;
     align-items: center;
-    background-color: white;
+    /* background-color: white; */
     padding: 10px 5px;
     margin: 10px;
     border-radius: 20px;
     transition-duration: 0.5s;
+}
+
+.ListItem.LightMode {
+    background-color: #f5f5f5 !important;
+    color: black !important;
+}
+
+.ListItem.DarkMode {
+    background-color: #333333 !important;
+    color: white !important;
+}
+
+.ListItem:hover {
+    background-color: rgba(255, 255, 255, 0.726) !important;
+}
+
+.ListItem:active {
+    background-color: #D9D9D9 !important;
 }
 .UserGroupsList p {
     margin-right: 5px;
