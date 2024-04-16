@@ -1,6 +1,6 @@
-import './App.css'
 import MainContainer from './Components/Main/MainContainer.jsx'
 import Login from './Components/Login'
+import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import ChatArea from './Components/ChatArea/ChatArea'
 import User from './Components/User'

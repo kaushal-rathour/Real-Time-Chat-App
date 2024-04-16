@@ -15,6 +15,15 @@
     transition-duration: 0.5s;
 }
 
+.LightModeIcon {
+    color: black;
+    transition-duration: 0.5s;
+}
+.DarkModeIcon {
+    color: white;
+    transition-duration: 0.5s;
+}
+
 
 .SidebarHeader {
     background-color: white;
@@ -27,6 +36,9 @@
     transition-duration: 0.5s;
 }
 
+.ShowConversation {
+    display: none !important;
+}
 .SidebarSearch {
     background-color: white;
     border-radius: 20px;
@@ -61,3 +73,38 @@
 .SidebarConversations::-webkit-scrollbar {
     display: none;
 }
+
+/* Media Query */ 
+
+@media only screen and (max-width: 40em) { 
+    .SidebarSearch, .SidebarConversations {
+        display: none;
+    }
+    .SidebarHeader {
+        flex-direction: column;
+        flex: 1;
+        width: min-content;
+        
+    }
+    .SidebarHeaderLeft, .SidebarHeaderRight {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    /* .ChatArea {
+        flex: 1 !important;
+    } */
+    .Sidebar {
+        flex: 0 !important;
+    }
+
+    .ShowConversation {
+        display: inline !important;
+    }
+
+    .UserGroupsContainer, .CreateGroupsContainer, .WelcomeContainer, .ChatArea {
+        flex: 1 !important;
+    }
+    
+} 

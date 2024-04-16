@@ -7,31 +7,16 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightlightIcon from '@mui/icons-material/Nightlight';
 import SearchIcon from '@mui/icons-material/Search';
+import ChatIcon from '@mui/icons-material/Chat';
 import ConversationItem from "../ConversationItem";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { themeToggle } from "../../Features/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Conversations from "../Conversations";
 
 export default function Sidebar () {
     const navigate = useNavigate();
-    let [conversations, setConversations] = useState([
-        {
-            name: "Name 1",
-            lastMessage: "LastMessage1",
-            timeStamp: "today",
-        },
-        {
-            name: "Name 2",
-            lastMessage: "LastMessage2",
-            timeStamp: "today",
-        },
-        {
-            name: "Name 3",
-            lastMessage: "LastMessage3",
-            timeStamp: "today",
-        }
-    ]);
+    
    const darkTheme = useSelector((state)=> state.themeKey);
     const dispatch = useDispatch();
     return (
@@ -40,52 +25,45 @@ export default function Sidebar () {
                 <div className="SidebarHeaderLeft">
                     
                         <IconButton>
-                            <AccountCircleIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/> 
+                            <AccountCircleIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
+                        </IconButton>
+
+                        <IconButton>
+                            <ChatIcon className={`ShowConversation ${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                         </IconButton>
                     
                 </div>
                 <div className="SidebarHeaderRight">
                    
                         <IconButton onClick ={()=>{navigate("/users")}} >
-                            <PersonAddIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/> 
+                            <PersonAddIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                         </IconButton>
 
                     
                
                         <IconButton  onClick ={()=>{navigate("/groups")}}>
-                            <GroupAddIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/> 
+                            <GroupAddIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                         </IconButton>
                     
 
                     <IconButton onClick ={()=>{navigate("/groups/new")}}>
-                <AddCircleIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/> 
+                <AddCircleIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                 </IconButton>
                 
                 <IconButton onClick={()=> dispatch( themeToggle())}>
-                {!darkTheme && <NightlightIcon className={darkTheme? "DarkMode": "LightMode"}/>}
-                {darkTheme && <LightModeIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/>}
+                {!darkTheme && <NightlightIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>}
+                {darkTheme && <LightModeIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>}
                 </IconButton>
                 </div>
             </div>
             <div className={`SidebarSearch ${darkTheme? "DarkMode": "LightMode"}`}>
                 <input type="text" placeholder="Search" className={`${darkTheme? "DarkMode": "LightMode"}`}/>
                 <IconButton>
-                <SearchIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/>
+                <SearchIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>
                 </IconButton>
             </div>
             <div className={`SidebarConversations ${darkTheme? "DarkMode": "LightMode"}`}>
-                {conversations.map((conversation, i)=>{
-                    return(<ConversationItem props={conversation} key={i}/>)
-                })}
-                {conversations.map((conversation, i)=>{
-                    return(<ConversationItem props={conversation} key={i}/>)
-                })}
-                {conversations.map((conversation, i)=>{
-                    return(<ConversationItem props={conversation} key={i}/>)
-                })}
-                {conversations.map((conversation, i)=>{
-                    return(<ConversationItem props={conversation} key={i}/>)
-                })}
+                <Conversations/>
             </div>
         </div>
     )

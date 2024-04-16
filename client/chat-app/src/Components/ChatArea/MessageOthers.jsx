@@ -4,7 +4,7 @@ export default function MessageOthers () {
     return (
         <div className="MessageOthersContainer">
             <div className="OthersConversationContainer">
-                <p className="ConversationIcon">{props.name[0]}</p>
+                {/* <p className="ConversationIcon">{props.name[0]}</p> */}
                 <div className="OthersMessageBox">
                     <p className="ConversationTitle">{props.name}</p>
                     <p className="ConversationMessage">{props.message}</p>

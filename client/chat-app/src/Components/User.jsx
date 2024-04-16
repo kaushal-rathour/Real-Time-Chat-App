@@ -3,11 +3,18 @@ import logo from "../assets/message_icon-512px.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
 import { useSelector } from "react-redux";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function User () {
     const darkTheme = useSelector((state)=> state.themeKey);
     return (
-        <div className={`UserGroupsContainer`}>
+        <AnimatePresence>
+        <motion.div 
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+         className={`UserGroupsContainer`}>
             
             <div className={`UserGroupsHeader ${darkTheme? "DarkMode": "LightMode"}`}>
                 <img src={logo}/>
@@ -17,42 +24,70 @@ export default function User () {
             <div className={`SidebarSearch ${darkTheme? "DarkMode": "LightMode"}`}>
                 <input type="text" placeholder="Search" className={`${darkTheme? "DarkMode": "LightMode"}`}/>
                 <IconButton>
-                <SearchIcon/>
+                <SearchIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>
                 </IconButton>
             </div>
 
-            <div className={`UserGroupsList ${darkTheme? "DarkMode": "LightMode"}`}>
-                <div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}>
+            <motion.div className={`UserGroupsList ${darkTheme? "DarkMode": "LightMode"}`}
+            variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: -20 }
+            }}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            >
+                <motion.div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}
+                 whileHover={{ scale: 1.01 }}
+                 whileTap={{ scale: 0.99 }}>
                     <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
                     <p className={`ConversationTitle`}>Test User</p>
-                </div>
+                </motion.div>
+
+                <motion.div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}
+                 whileHover={{ scale: 1.01 }}
+                 whileTap={{ scale: 0.99 }}>
+                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
+                    <p className={`ConversationTitle`}>Test User</p>
+                </motion.div>
+
+                <motion.div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}
+                 whileHover={{ scale: 1.01 }}
+                 whileTap={{ scale: 0.99 }}>
+                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
+                    <p className={`ConversationTitle`}>Test User</p>
+                </motion.div>
+
+                <motion.div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}
+                 whileHover={{ scale: 1.01 }}
+                 whileTap={{ scale: 0.99 }}>
+                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
+                    <p className={`ConversationTitle`}>Test User</p>
+                </motion.div>
+
+                <motion.div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}
+                 whileHover={{ scale: 1.01 }}
+                 whileTap={{ scale: 0.99 }}>
+                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
+                    <p className={`ConversationTitle`}>Test User</p>
+                </motion.div>
+
+                <motion.div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}
+                 whileHover={{ scale: 1.01 }}
+                 whileTap={{ scale: 0.99 }}>
+                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
+                    <p className={`ConversationTitle`}>Test User</p>
+                </motion.div>
+
+                <motion.div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}
+                 whileHover={{ scale: 1.01 }}
+                 whileTap={{ scale: 0.99 }}>
+                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
+                    <p className={`ConversationTitle`}>Test User</p>
+                </motion.div>
                 
-                <div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test User</p>
-                </div>
-                <div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test User</p>
-                </div>
-                <div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test User</p>
-                </div>
-                <div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test User</p>
-                </div>
-                <div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test User</p>
-                </div>
-                <div className={`ListItem ${darkTheme? "DarkMode": "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test User</p>
-                </div>
-                
-            </div>
-        </div>
+            </motion.div>
+        </motion.div>
+        </AnimatePresence>
     )
 }

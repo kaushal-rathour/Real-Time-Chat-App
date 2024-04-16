@@ -5,6 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MessageOthers from "./MessageOthers";
 import MessageSelf from "./MessageSelf";
 import { useSelector } from "react-redux";
+import { AnimatePresence, motion } from "framer-motion";
 export default function ChatArea () {
     const darkTheme = useSelector((state)=> state.themeKey);
     let props =
@@ -14,7 +15,12 @@ export default function ChatArea () {
             timeStamp: "today",
         };
     return (
-        <div className="ChatArea">
+        <AnimatePresence>
+        <motion.div 
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }} className="ChatArea">
             <div className={`ChatAreaHeader ${darkTheme? "DarkMode": "LightMode"}`}>
                 <p className="ConversationIcon">{props.name[0]}</p>
                 <div className="HeaderText">
@@ -22,10 +28,16 @@ export default function ChatArea () {
                     <p className={`ConversationTime ${darkTheme? "DarkMode": "LightMode"}`}>{props.timeStamp}</p>
                 </div>
                 <IconButton>
-                    <DeleteIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/>
+                    <DeleteIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>
                 </IconButton>
             </div>
-            <div className={`MessageContainer ${darkTheme? "DarkMode": "LightMode"}`}>
+            <motion.div variants={{
+                    visible: { opacity: 1, y: 0 },
+                    hidden: { opacity: 0, y: -20 }
+                }}
+                initial="hidden"
+                animate="visible"
+                transition={{ duration: 0.5, delay: 0.2 }} className={`MessageContainer ${darkTheme? "DarkMode": "LightMode"}`}>
             <div className="MessageArea">
                 <MessageOthers/>
                 <MessageSelf/>
@@ -44,14 +56,15 @@ export default function ChatArea () {
                 <MessageOthers/>
                 <MessageSelf/>
             </div>
-    </div>
+    </motion.div>
 
             <div className={`TextInputArea ${darkTheme? "DarkMode": "LightMode"}`}>
                 <input type="text" placeholder="Type a message" className={`SearchBox ${darkTheme? "DarkMode": "LightMode"}`}/>
                 <IconButton>
-                    <SendIcon className={`Icon ${darkTheme? "DarkMode": "LightMode"}`}/>
+                    <SendIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>
                 </IconButton>
             </div>
-        </div>
+        </motion.div>
+        </AnimatePresence>
     )
 }

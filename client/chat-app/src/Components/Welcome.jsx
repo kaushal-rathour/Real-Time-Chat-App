@@ -4,9 +4,7 @@ export default function Welcome () {
     return (
         <div className="WelcomeContainer">
            <img src={logo}/>
-           <div className="WelcomeLogo">
-                <p>Your Messages Will Appear Here.</p>
-           </div>
+          <p>Here's where your messages will show up. Stay connected and keep the conversation going!</p>
         </div>
     )
 }
