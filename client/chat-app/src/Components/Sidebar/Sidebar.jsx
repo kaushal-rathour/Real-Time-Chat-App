@@ -13,12 +13,19 @@ import { useNavigate } from "react-router-dom";
 import { themeToggle } from "../../Features/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Conversations from "../Conversations";
+import LogoutIcon from '@mui/icons-material/Logout';
+import { toggleRefresh } from "../../Features/refreshSlice";
 
 export default function Sidebar () {
     const navigate = useNavigate();
-    
-   const darkTheme = useSelector((state)=> state.themeKey);
+    const user = JSON.parse(localStorage.getItem("userData"));
+    const darkTheme = useSelector((state)=> state.themeKey);
     const dispatch = useDispatch();
+    let logoutHandler = () => {
+        localStorage.removeItem("userData");
+        navigate("/");
+    };
+
     return (
         <div className="Sidebar">
             <div className={`SidebarHeader ${darkTheme? "DarkMode": "LightMode"}`}>
@@ -53,6 +60,10 @@ export default function Sidebar () {
                 <IconButton onClick={()=> dispatch( themeToggle())}>
                 {!darkTheme && <NightlightIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>}
                 {darkTheme && <LightModeIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>}
+                </IconButton>
+                
+                <IconButton onClick={logoutHandler}>
+                {<LogoutIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>}
                 </IconButton>
                 </div>
             </div>

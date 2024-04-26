@@ -5,8 +5,17 @@ import CreateGroups from "../CreateGroups.jsx"
 import "./MainContainer.css"
 import User from "../User.jsx"
 import Groups from "../Groups.jsx"
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 export default function MainContainer () {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const navigate = useNavigate();
+    useEffect(()=> {
+        if(!userData) {
+            console.log("User Not Authenticated");
+            navigate("/");
+        }
+    })
     return(
         <div className="MainContainer" >
             <Sidebar/>

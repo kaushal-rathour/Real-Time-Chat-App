@@ -21,6 +21,11 @@ const userSchema = new Schema({
             message: props => `${props.value} is not a valid username. Only letters, numbers, and underscores are allowed.`,
         },
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     createdAt: {
         type: Date,
         default: Date.now,

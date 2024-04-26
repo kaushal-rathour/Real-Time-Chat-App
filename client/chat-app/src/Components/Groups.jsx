@@ -2,11 +2,33 @@ import "./UserGroups.css";
 import logo from "../assets/message_icon-512px.png";
 import SearchIcon from "@mui/icons-material/Search";
 import { IconButton } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {AnimatePresence, motion} from "framer-motion";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { toggleRefresh } from "../Features/refreshSlice";
  
 export default function Groups () {
     const darkTheme = useSelector((state)=> state.themeKey);
+    const [groups, setGroups] = useState([]);
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    const dispatch = useDispatch();
+    const config = {
+        headers: {
+            Authorization: `${userData.token}`
+        }
+    };
+    const fetchGroups = async ()=> {
+        try{
+        let response = await axios.get("http://localhost:3000/fetchgroups", config);
+        setGroups(response.data);
+        }catch(err) {
+            console.log(err.message);
+        }
+    }
+    useEffect(()=> {
+        fetchGroups();
+    }, []);
     return (
         <AnimatePresence>
         <motion.div 
@@ -38,58 +60,25 @@ export default function Groups () {
                 animate="visible"
                 transition={{ duration: 0.5, delay: 0.2 }}>
 
-                <motion.div 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test Group</p>
-                </motion.div>
-                <motion.div 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test Group</p>
-                </motion.div>
-                <motion.div 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test Group</p>
-                </motion.div>
-                <motion.div 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test Group</p>
-                </motion.div>
-                <motion.div 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test Group</p>
-                </motion.div>
-                <motion.div 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test Group</p>
-                </motion.div>
-                <motion.div 
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`}>
-                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
-                    <p className={`ConversationTitle`}>Test Group</p>
-                </motion.div>
                 
 
-            </motion.div>
+                {groups.map((group, index)=> {
+                    return<motion.div 
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                    className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`} key={index} onClick={async()=> {
+                        await axios.put("http://localhost:3000/addselftogroup/", {
+                                chatId: group._id,
+                                userId: userData._id,
+                        },config);
+                        dispatch(toggleRefresh());
+                    }}>
+                    <p className={`ConversationIcon ${darkTheme ? "DarkMode" : "LightMode"}`}>T</p>
+                    <p className={`ConversationTitle`}>{group.chatName}</p>
+                </motion.div>
+                })}
+                
+                </motion.div>
         </motion.div>
     </AnimatePresence>
     

@@ -10,9 +10,12 @@ const messageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    content: {
+        type: String,
+    },
     chat: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "Chat"
     },
     timeStamp: {
         type: Date,

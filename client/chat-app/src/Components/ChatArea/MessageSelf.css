@@ -7,6 +7,9 @@
     min-width: min-content;
     max-width: 90%;
     width: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
     padding: 10px 10px;
     margin: 5px;
     border-radius: 20px;

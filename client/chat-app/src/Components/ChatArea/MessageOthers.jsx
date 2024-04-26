@@ -1,14 +1,19 @@
 import "./MessageOthers.css"
-export default function MessageOthers () {
-    let props = {name: "Kaushal Rathour", message: "This is a simple message by Kaushal Rathour Please Move To Next Line border-bottom: 5px solid rgb(9, 218, 255); border-bottom: 5px solid rgb(9, 218, 255); border-bottom: 5px solid rgb(9, 218, 255);"}
+export default function MessageOthers ({message, sender, time}) {
+    time = new Date(time);
+    let hours = time.getHours();
+    const minutes = time.getMinutes();
+    const meridiem = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    const formattedTime = `${hours}:${minutes}${meridiem}`;
     return (
         <div className="MessageOthersContainer">
             <div className="OthersConversationContainer">
-                {/* <p className="ConversationIcon">{props.name[0]}</p> */}
+                <p className="ConversationIcon">{sender[0]}</p>
                 <div className="OthersMessageBox">
-                    <p className="ConversationTitle">{props.name}</p>
-                    <p className="ConversationMessage">{props.message}</p>
-                    <p className="OthersTimeStamp">12:00 PM</p>
+                    <p className="ConversationTitle">{sender}</p>
+                    <p className="ConversationMessage">{message}</p>
+                    <p className="OthersTimeStamp">{formattedTime}</p>
                 </div>
             </div>
         </div>

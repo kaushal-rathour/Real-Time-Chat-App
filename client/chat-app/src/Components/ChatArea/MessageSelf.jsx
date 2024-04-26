@@ -1,11 +1,16 @@
 import "./MessageSelf.css"
-export default function MessageSelf () {
-    let props = {name: "You", message: "This is a simple message by you This is a simple message by you This is a simple message by you"}
+export default function MessageSelf ({message, time}) {
+    time = new Date(time);
+    let hours = time.getHours();
+    const minutes = time.getMinutes();
+    const meridiem = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12;
+    const formattedTime = `${hours}:${minutes}${meridiem}`;
     return (
         <div className="MessageSelfContainer">
             <div className="SelfMessageBox">
-                <p className="ConversationMessage">{props.message}</p>
-                <p className="SelfTimeStamp">12:00 AM</p>
+                <p className="ConversationMessage">{message}</p>
+                <p className="SelfTimeStamp">{formattedTime}</p>
             </div>
         </div>
     )

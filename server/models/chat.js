@@ -7,12 +7,12 @@ const chatSchema = new Schema({
     },
     latestMessage: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "Message"
     },
     isGroupChat: {
         type: Boolean
     },
-    users: [{
+    participants: [{
         type: Schema.Types.ObjectId,
         ref: "User"
     }],
