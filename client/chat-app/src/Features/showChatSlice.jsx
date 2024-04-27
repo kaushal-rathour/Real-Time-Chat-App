@@ -8,6 +8,6 @@ export const showChatSlice = createSlice({
   },
 });
 
-export const { toggleShowChat } = refreshSlice.actions;
+export const { toggleShowChat } = showChatSlice.actions;
 
 export default showChatSlice.reducer;
