@@ -13,16 +13,16 @@ import { themeToggle } from "../../Features/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Conversations from "../Conversations";
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useState } from "react";
+import {toggleShowChat } from "../../Features/showChatSlice";
 export default function Sidebar () {
     const navigate = useNavigate();
+    const showChat = useSelector((state)=> state.showChat);
     const darkTheme = useSelector((state)=> state.themeKey);
     const dispatch = useDispatch();
     let logoutHandler = () => {
         localStorage.removeItem("userData");
         navigate("/");
     };
-    const [showChat, setShowChat] = useState(false);
     return (
         <div className="Sidebar">
             <div className={`SidebarHeader ${darkTheme? "DarkMode": "LightMode"}`}>
@@ -32,9 +32,7 @@ export default function Sidebar () {
                             <AccountCircleIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                         </IconButton>
 
-                        <IconButton  className="ShowChatToggle" onClick={()=> {
-                            setShowChat(!showChat);
-                        }}>
+                        <IconButton  className="ShowChatToggle" onClick={()=> dispatch( toggleShowChat())}>
                             <ChatIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                         </IconButton>
                     
