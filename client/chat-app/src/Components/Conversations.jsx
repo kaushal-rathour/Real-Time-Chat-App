@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
 import ConversationItem from "./ConversationItem";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-
+import { useSelector} from "react-redux";
+const LOCAL_ENDPOINT = "http://localhost:3000";
+const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
 
 export default function Conversations () {
     const userData = JSON.parse(localStorage.getItem("userData"));
     let [conversations, setConversations] = useState([]);
     const refresh = useSelector((state) => state.refresh);
+    const config = {
+        headers: {
+            Authorization: `${userData.token}`
+        }
+    };
     const fetchChats = async ()=> {
-            const config = {
-                headers: {
-                    Authorization: `${userData.token}`
-                }
-            };
-            let response = await axios.get("http://localhost:3000/chat/", config);
+        try {
+            let response = await axios.get(`${LOCAL_ENDPOINT}/chat`, config);
             setConversations(response.data.reverse());
+        }catch(error) {
+        }
         }
     useEffect(()=> {
         fetchChats();

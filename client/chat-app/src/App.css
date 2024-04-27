@@ -12,12 +12,3 @@
   -ms-user-select: none; 
   user-select: none;
 }
-
-.AlertContainer {
-  display: flex;
-  flex-direction: column; 
-  justify-content: flex-end; 
-  position: fixed;
-  right: 20px; 
-  z-index: 9999;
-}

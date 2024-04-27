@@ -36,6 +36,10 @@
     transition-duration: 0.5s;
 }
 
+.ShowChatToggle {
+    display: none !important;
+}
+
 .ShowConversation {
     display: none !important;
 }
@@ -74,6 +78,10 @@
     display: none;
 }
 
+.HideChat, .ShowChat {
+    display: none;
+}
+
 /* Media Query */ 
 
 @media only screen and (max-width: 40em) { 
@@ -92,15 +100,27 @@
         justify-content: center;
         align-items: center;
     }
-    /* .ChatArea {
-        flex: 1 !important;
-    } */
+    .ShowChatToggle {
+        display: block !important;
+    }
     .Sidebar {
         flex: 0 !important;
     }
 
     .ShowConversation {
         display: inline !important;
+    }
+    .ShowChat {
+        display: flex;
+        position: absolute;
+        flex-direction: column;
+        left: 100px;
+        right: 20px;
+        border-radius: 20px;
+        overflow: scroll;
+        bottom: 65px;
+        top: 65px;
+        z-index: 10000;
     }
 
     .UserGroupsContainer, .CreateGroupsContainer, .WelcomeContainer, .ChatArea {

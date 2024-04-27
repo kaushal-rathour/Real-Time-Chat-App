@@ -12,6 +12,8 @@ import { useParams, useLocation } from "react-router-dom";
 import { toggleRefresh } from "../../Features/refreshSlice";
 import { io } from "socket.io-client";
 import { formatDistance } from 'date-fns';
+const LOCAL_ENDPOINT = "http://localhost:3000";
+const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
 export default function ChatArea () {
     const darkTheme = useSelector((state)=> state.themeKey);
     const refresh = useSelector((state) => state.refresh);
@@ -22,7 +24,7 @@ export default function ChatArea () {
     messages.reverse();
     let timeStamp  = "";
     if(messages.length>0) {
-        timeStamp = formatDistance(new Date(messages[0].timeStamp), new Date());
+        timeStamp = formatDistance(new Date(messages[messages.length-1].timeStamp), new Date());
     }
     const [content, setContent] = useState("");
     const { _id: chatId } = useParams();
@@ -49,24 +51,30 @@ export default function ChatArea () {
         }, []);
     
         const sendMessage = async () => {
-            const response = await axios.post("http://localhost:3000/message", {
+            try {
+                const response = await axios.post(`${LOCAL_ENDPOINT}/message`, {
                 content: content,
                 chatId: chatId,
             }, config);
     
-            setContent("");
-            socket.emit("newMessage", response.data);
+                setContent("");
+                socket.emit("newMessage", response.data);
+            }catch(error) {
+
+            }
+            
         };
     
         useEffect(() => {
-            const fetchMessages = async () => {
-                const response = await axios.get(
-                    `http://localhost:3000/message/${chatId}`,
-                config);
-                setMessages(response.data);
-                socket.emit("joinChat", chatId);
-            };
-    
+            
+                const fetchMessages = async () => {
+                    const response = await axios.get(
+                        `${LOCAL_ENDPOINT}/message/${chatId}`,
+                    config);
+                    setMessages(response.data);
+                    socket.emit("joinChat", chatId);
+                };
+
             fetchMessages();
         }, [chatId, refresh, messages]);
     
@@ -85,9 +93,9 @@ export default function ChatArea () {
                     <p className={`ConversationTitle ${darkTheme? "DarkMode": "LightMode"}`}>{chatName}</p>
                     <p className={`ConversationTime ${darkTheme? "DarkMode": "LightMode"}`}>{timeStamp}</p>
                 </div>
-                <IconButton>
+                {/* <IconButton>
                     <DeleteIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/>
-                </IconButton>
+                </IconButton> */}
             </div>
             <motion.div variants={{
                     visible: { opacity: 1, y: 0 },

@@ -1,17 +1,19 @@
 import { Button, TextField } from "@mui/material";
-import logo from "../assets/message_icon-512px.png";
 import "./Login.css";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
+import { useNavigate} from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios"; 
 import { Alert, Spin } from "antd";
+const LOCAL_ENDPOINT = "http://localhost:3000";
+const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
 
 export default function Login() {
+    const userData = JSON.parse(localStorage.getItem("userData"));
     const [isSignUp, setIsSignUp] = useState(false);
     const [loading, setLoading] = useState(false);
     const [alert, setAlert] = useState(false);
     const [data, setData] = useState({ name: "", username: "", email: "", password: "" });
-
+    const navigate = useNavigate();
     const toggleSignup = () => {
         setIsSignUp(!isSignUp);
     };
@@ -25,7 +27,7 @@ export default function Login() {
             event.preventDefault();
             setAlert(false);
             setLoading(true);
-            let response = await axios.post("http://localhost:3000/login", data);
+            let response = await axios.post(`${LOCAL_ENDPOINT}/login`, data);
             localStorage.setItem("userData", JSON.stringify(response.data));
             setAlert({ type: "success", message: "Login Successful" });
             setLoading(false);
@@ -42,7 +44,7 @@ export default function Login() {
             event.preventDefault();
             setAlert(false);
             setLoading(true);
-            let response = await axios.post("http://localhost:3000/register", data);
+            let response = await axios.post(`${LOCAL_ENDPOINT}/register`, data);
             localStorage.setItem("userData", JSON.stringify(response.data));
             setAlert({ type: "success", message: "Registered Successfully" });
             setLoading(false);
@@ -53,18 +55,17 @@ export default function Login() {
             setLoading(false);
         }
     };
-
-    const navigate = useNavigate();
+    useEffect(()=> {
+        if(userData) {
+            navigate("/welcome");
+        }
+    })
 
     return (
         <div className="LoginContainer">
             <div className="AlertContainer">
                 {alert && <Alert type={alert.type} message={alert.message} closable showIcon afterClose={() => { setAlert(false) }} />}
             </div>
-            <div className="ImageContainer">
-                <img src={logo} alt="Logo" />
-            </div>
-            
             <form className="LoginBox" onSubmit={isSignUp ? signUpHandler : loginHandler} method="POST">
                 {loading && <Spin size="small" />}
                 <p className="LoginBoxText">{isSignUp ? "Create a new account" : "Login to your account"}</p>
@@ -73,9 +74,9 @@ export default function Login() {
                 <TextField label="Username" className="username" type="text" variant="outlined" name="username" onChange={onChangeHandler} required />
                 <TextField label="Password" variant="outlined" name="password" type="password" onChange={onChangeHandler} required />
                 <Button variant="contained" type="submit" disabled={loading}>{isSignUp ? "Sign Up" : "Login"}</Button>
-                <Button variant="text" onClick={toggleSignup}>
-                    {isSignUp ? "Already registered? Login" : "Not registered yet? Sign Up"}
-                </Button>
+                <a className="LoginSwitch" variant="text" onClick={toggleSignup}>
+                    {isSignUp ? "Already registered? Login" : `Not registered yet? Sign Up`}
+                </a>
             </form>
         </div>
     );

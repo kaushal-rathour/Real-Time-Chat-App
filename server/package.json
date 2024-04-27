@@ -1,4 +1,7 @@
 {
+  "engine": {
+    "node": "v18.18.0"
+  },
   "name": "chat-app",
   "version": "1.0.0",
   "description": "",
