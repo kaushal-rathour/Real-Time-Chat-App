@@ -65,6 +65,9 @@ app.use("/", groupRoute);
 
 
 
+app.all("*", (req, res)=> {
+  res.status(404).json({message: "Page Not Found"});
+})
 
 app.use((err, req, res, next) => {
   let {status = 500, message = "Some Error Occured"} = err;
