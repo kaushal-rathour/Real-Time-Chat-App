@@ -21,7 +21,6 @@ export default function ChatArea () {
     const queryParams = new URLSearchParams(location.search);
     const userData = JSON.parse(localStorage.getItem("userData"));
     let [messages, setMessages] = useState([]);
-    messages.reverse();
     let timeStamp  = "";
     if(messages.length>0) {
         timeStamp = formatDistance(new Date(messages[messages.length-1].timeStamp), new Date());
