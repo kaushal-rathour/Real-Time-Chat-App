@@ -13,7 +13,7 @@ import { toggleRefresh } from "../../Features/refreshSlice";
 import { io } from "socket.io-client";
 import { formatDistance } from 'date-fns';
 const LOCAL_ENDPOINT = "http://localhost:3000";
-const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
+const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 export default function ChatArea () {
     const darkTheme = useSelector((state)=> state.themeKey);
     const refresh = useSelector((state) => state.refresh);
@@ -52,7 +52,7 @@ export default function ChatArea () {
     
         const sendMessage = async () => {
             try {
-                const response = await axios.post(`${LOCAL_ENDPOINT}/message`, {
+                const response = await axios.post(`${DEPLOYED_ENDPOINT}/message`, {
                 content: content,
                 chatId: chatId,
             }, config);
@@ -69,7 +69,7 @@ export default function ChatArea () {
             
                 const fetchMessages = async () => {
                     const response = await axios.get(
-                        `${LOCAL_ENDPOINT}/message/${chatId}`,
+                        `${DEPLOYED_ENDPOINT}/message/${chatId}`,
                     config);
                     setMessages(response.data);
                     socket.emit("joinChat", chatId);

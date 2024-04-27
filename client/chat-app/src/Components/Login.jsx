@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios"; 
 import { Alert, Spin } from "antd";
 const LOCAL_ENDPOINT = "http://localhost:3000";
-const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
+const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 
 export default function Login() {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -27,7 +27,7 @@ export default function Login() {
             event.preventDefault();
             setAlert(false);
             setLoading(true);
-            let response = await axios.post(`${LOCAL_ENDPOINT}/login`, data);
+            let response = await axios.post(`${DEPLOYED_ENDPOINT}/login`, data);
             localStorage.setItem("userData", JSON.stringify(response.data));
             setAlert({ type: "success", message: "Login Successful" });
             setLoading(false);
@@ -44,7 +44,7 @@ export default function Login() {
             event.preventDefault();
             setAlert(false);
             setLoading(true);
-            let response = await axios.post(`${LOCAL_ENDPOINT}/register`, data);
+            let response = await axios.post(`${DEPLOYED_ENDPOINT}/register`, data);
             localStorage.setItem("userData", JSON.stringify(response.data));
             setAlert({ type: "success", message: "Registered Successfully" });
             setLoading(false);

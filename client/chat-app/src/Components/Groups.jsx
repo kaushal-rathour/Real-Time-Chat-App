@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toggleRefresh } from "../Features/refreshSlice";
 const LOCAL_ENDPOINT = "http://localhost:3000";
-const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
+const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com/";
 export default function Groups () {
     const darkTheme = useSelector((state)=> state.themeKey);
     const [groups, setGroups] = useState([]);
@@ -21,7 +21,7 @@ export default function Groups () {
     };
     const fetchGroups = async ()=> {
         try{
-        let response = await axios.get(`${LOCAL_ENDPOINT}/fetchgroups`, config);
+        let response = await axios.get(`${DEPLOYED_ENDPOINT}/fetchgroups`, config);
         setGroups(response.data);
         }catch(err) {
             console.log(err.message);

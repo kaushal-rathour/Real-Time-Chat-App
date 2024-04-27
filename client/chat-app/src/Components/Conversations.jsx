@@ -3,7 +3,7 @@ import ConversationItem from "./ConversationItem";
 import axios from "axios";
 import { useSelector} from "react-redux";
 const LOCAL_ENDPOINT = "http://localhost:3000";
-const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
+const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com/";
 
 export default function Conversations () {
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -16,7 +16,7 @@ export default function Conversations () {
     };
     const fetchChats = async ()=> {
         try {
-            let response = await axios.get(`${LOCAL_ENDPOINT}/chat`, config);
+            let response = await axios.get(`${DEPLOYED_ENDPOINT}/chat`, config);
             setConversations(response.data.reverse());
         }catch(error) {
         }

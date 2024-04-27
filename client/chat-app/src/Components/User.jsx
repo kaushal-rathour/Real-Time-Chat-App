@@ -9,7 +9,7 @@ import {useEffect, useState} from "react";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { toggleRefresh } from "../Features/refreshSlice";
 const LOCAL_ENDPOINT = "http://localhost:3000";
-const DEPLOYED_ENDPOINT = "https://www.real-time-chat.render.com";
+const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 export default function User () {
     const darkTheme = useSelector((state)=> state.themeKey);
     const refresh = useSelector((state) => state.refresh);
@@ -23,7 +23,7 @@ export default function User () {
                 Authorization: `${userData.token}`
             }
         };
-        let response = await axios.get(`${LOCAL_ENDPOINT}/fetchusers`, config);
+        let response = await axios.get(`${DEPLOYED_ENDPOINT}/fetchusers`, config);
         setUsers(response.data);
         }catch(err) {
             console.log(err.message);

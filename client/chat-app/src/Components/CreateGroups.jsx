@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import { toggleRefresh } from "../Features/refreshSlice";
+const LOCAL_ENDPOINT = "http://localhost:3000";
+const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 export default function CreateGroups () {
     const darkTheme = useSelector((state)=> state.themeKey);
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -20,7 +21,7 @@ export default function CreateGroups () {
                 Authorization: `${userData.token}`
             }
         };
-        await axios.post("http://localhost:3000/creategroup/", {
+        await axios.post(`${DEPLOYED_ENDPOINT}/creategroup`, {
             name: name,
             participants: [userData._id]
         },config);
