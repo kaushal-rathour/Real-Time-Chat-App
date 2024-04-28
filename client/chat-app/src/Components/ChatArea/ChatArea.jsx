@@ -12,11 +12,13 @@ import { useParams, useLocation } from "react-router-dom";
 import { toggleRefresh } from "../../Features/refreshSlice";
 import { io } from "socket.io-client";
 import { formatDistance } from 'date-fns';
+import { useRef } from "react";
 const LOCAL_ENDPOINT = "http://localhost:3000";
 const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 export default function ChatArea () {
     const darkTheme = useSelector((state)=> state.themeKey);
     const refresh = useSelector((state) => state.refresh);
+    const scrollableRef = useRef(null);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const userData = JSON.parse(localStorage.getItem("userData"));
@@ -39,15 +41,15 @@ export default function ChatArea () {
             setContent(event.target.value);
         };
         
-        useEffect(() => {
-            socket.emit("setup", userData);
-        }, []);
+        // useEffect(() => {
+        //     socket.emit("setup", userData);
+        // }, []);
     
-        useEffect(() => {
-            socket.on("messageReceived", (newMessage) => {
-                setMessages((prevMessages) => [...prevMessages, newMessage]);
-            });
-        }, []);
+        // useEffect(() => {
+        //     socket.on("messageReceived", (newMessage) => {
+        //         setMessages((prevMessages) => [...prevMessages, newMessage]);
+        //     });
+        // }, []);
     
         const sendMessage = async () => {
             try {
@@ -57,13 +59,21 @@ export default function ChatArea () {
             }, config);
     
                 setContent("");
-                socket.emit("newMessage", response.data);
+                // socket.emit("newMessage", response.data);
             }catch(error) {
 
             }
             
         };
-    
+        useEffect(() => {
+            const scrollToBottom = () => {
+              if (scrollableRef.current) {
+                scrollableRef.current.scrollTop = scrollableRef.current.scrollHeight;
+              }
+            };
+            scrollToBottom();
+          }, [messages]);
+
         useEffect(() => {
             
                 const fetchMessages = async () => {
@@ -71,7 +81,7 @@ export default function ChatArea () {
                         `${DEPLOYED_ENDPOINT}/message/${chatId}`,
                     config);
                     setMessages(response.data);
-                    socket.emit("joinChat", chatId);
+                    // socket.emit("joinChat", chatId);
                 };
 
             fetchMessages();
@@ -102,7 +112,8 @@ export default function ChatArea () {
                 }}
                 initial="hidden"
                 animate="visible"
-                transition={{ duration: 0.5, delay: 0.2 }} className={`MessageContainer ${darkTheme? "DarkMode": "LightMode"}`}>
+                ref={scrollableRef}
+                transition={{ duration: 0.5, delay: 0.2 }} className={`MessageContainer ${darkTheme? "DarkMode": "LightMode"} scrollable`}>
             <div className="MessageArea">
                         {messages.map((message, index)=> {
                             if (message.sender._id === userData._id) {

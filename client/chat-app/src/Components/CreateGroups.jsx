@@ -4,7 +4,7 @@ import "./CreateGroups.css"
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const LOCAL_ENDPOINT = "http://localhost:3000";
 const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 export default function CreateGroups () {
@@ -12,6 +12,7 @@ export default function CreateGroups () {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const [name, setName] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const onChangeHandler = (event) => {
         setName(event.target.value);
     };
@@ -27,6 +28,7 @@ export default function CreateGroups () {
         },config);
         navigate("/groups");
     }
+
     return (
         <div className="CreateGroupsContainer">
             <div className={`CreateGroupsTitle ${darkTheme? "DarkMode": "LightMode"}`}>

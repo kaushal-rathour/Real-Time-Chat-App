@@ -4,7 +4,7 @@ export const showChatSlice = createSlice({
   name: "showChat",
   initialState: false,
   reducers: {
-    toggleRefresh: (state) => !state,
+    toggleShowChat: (state) => !state,
   },
 });
 

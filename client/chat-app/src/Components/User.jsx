@@ -72,7 +72,7 @@ export default function User () {
                                 Authorization: `${userData.token}`
                             }
                         };
-                        await axios.post("http://localhost:3000/chat/", {userId: user._id}, config);
+                        await axios.post(`${DEPLOYED_ENDPOINT}/chat`, {userId: user._id}, config);
                         dispatch(toggleRefresh());
                     }}>
                         <p className={`ConversationIcon ${darkTheme? "DarkMode": "LightMode"}`}>{user.name[0]}</p>

@@ -13,7 +13,7 @@ import { themeToggle } from "../../Features/themeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Conversations from "../Conversations";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {toggleShowChat } from "../../Features/showChatSlice";
+import { toggleShowChat } from "../../Features/showChatSlice";
 export default function Sidebar () {
     const navigate = useNavigate();
     const showChat = useSelector((state)=> state.showChat);
@@ -39,18 +39,24 @@ export default function Sidebar () {
                 </div>
                 <div className="SidebarHeaderRight">
                    
-                        <IconButton onClick ={()=>{navigate("/users")}} >
+                        <IconButton onClick ={()=>{
+                            {showChat? dispatch( toggleShowChat()): ""}
+                            navigate("/users")}} >
                             <PersonAddIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                         </IconButton>
 
                     
                 
-                        <IconButton  onClick ={()=>{navigate("/groups")}}>
+                        <IconButton  onClick ={()=>{
+                            {showChat? dispatch( toggleShowChat()): ""}
+                            navigate("/groups")}}>
                             <GroupAddIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                         </IconButton>
                     
 
-                    <IconButton onClick ={()=>{navigate("/groups/new")}}>
+                    <IconButton onClick ={()=>{
+                        {showChat? dispatch( toggleShowChat()): ""}
+                        navigate("/groups/new")}}>
                 <AddCircleIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
                 </IconButton>
                 

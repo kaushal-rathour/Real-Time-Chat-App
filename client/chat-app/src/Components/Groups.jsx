@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toggleRefresh } from "../Features/refreshSlice";
 const LOCAL_ENDPOINT = "http://localhost:3000";
-const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com/";
+const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 export default function Groups () {
     const darkTheme = useSelector((state)=> state.themeKey);
     const [groups, setGroups] = useState([]);
@@ -68,7 +68,7 @@ export default function Groups () {
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                     className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`} key={index} onClick={async()=> {
-                        await axios.put("http://localhost:3000/addselftogroup/", {
+                        await axios.put(`${LOCAL_ENDPOINT}/addselftogroup`, {
                                 chatId: group._id,
                                 userId: userData._id,
                         },config);
