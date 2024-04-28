@@ -81,31 +81,31 @@ const server = app.listen(PORT, () => {
   console.log(`Listening To ${PORT}`);
 });
 
-const io = require("socket.io")(server, {
-  cors: {
-      origin: "*",
-  },
-  pingTimeout: 60000,
-});
+// const io = require("socket.io")(server, {
+//   cors: {
+//       origin: "*",
+//   },
+//   pingTimeout: 60000,
+// });
 
-io.on("connection", (socket) => {
-  console.log("Connection Established");
+// io.on("connection", (socket) => {
+//   console.log("Connection Established");
 
-  socket.on("setup", (userData) => {
-      socket.join(userData._id);
-      console.log("Server Joined");
-      socket.emit("connected");
-  });
+//   socket.on("setup", (userData) => {
+//       socket.join(userData._id);
+//       console.log("Server Joined");
+//       socket.emit("connected");
+//   });
 
-  socket.on("joinChat", (chatId) => {
-      socket.join(chatId);
-      console.log("Room Joined");
-  });
+//   socket.on("joinChat", (chatId) => {
+//       socket.join(chatId);
+//       console.log("Room Joined");
+//   });
 
-  socket.on("newMessage", (newMessage) => {
-      io.to(newMessage.chatId).emit("messageReceived", newMessage);
-  });
-});
+//   socket.on("newMessage", (newMessage) => {
+//       io.to(newMessage.chatId).emit("messageReceived", newMessage);
+//   });
+// });
 
 
 main().catch(err => console.log(`Please check your internet connection ${err.message}`));
