@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { toggleRefresh } from "../Features/refreshSlice";
 const LOCAL_ENDPOINT = "http://localhost:3000";
 const DEPLOYED_ENDPOINT = "https://real-time-chat-app-yg74.onrender.com";
 export default function CreateGroups () {
@@ -26,6 +27,7 @@ export default function CreateGroups () {
             name: name,
             participants: [userData._id]
         },config);
+        dispatch(toggleRefresh());
         navigate("/groups");
     }
 

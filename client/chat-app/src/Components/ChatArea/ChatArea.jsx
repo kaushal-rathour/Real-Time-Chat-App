@@ -82,6 +82,7 @@ export default function ChatArea () {
                     config);
                     setMessages(response.data);
                     // socket.emit("joinChat", chatId);
+                    dispatch(toggleRefresh());
                 };
 
             fetchMessages();
