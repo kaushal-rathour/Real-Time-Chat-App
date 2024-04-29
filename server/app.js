@@ -91,7 +91,7 @@ async function main() {
 }
 
 const LOCAL_ORIGIN = "http://localhost:5173";
-const DEPLOYED_ORIGIN = "https://q-startechnologies.com"
+const DEPLOYED_ORIGIN = "https://www.q-startechnologies.com"
 
 const io = require("socket.io")(server, {
   cors: {
