@@ -17,13 +17,13 @@ export default function Conversations () {
     const fetchChats = async ()=> {
         try {
             let response = await axios.get(`${DEPLOYED_ENDPOINT}/chat`, config);
-            setConversations(response.data.reverse());
+            setConversations(response.data);
         }catch(error) {
         }
         }
     useEffect(()=> {
         fetchChats();
-    },[refresh])
+    },[refresh, conversations])
     return (
         <>
                 {conversations.map((conversation, i)=>{

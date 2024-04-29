@@ -68,7 +68,7 @@ export default function Groups () {
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                     className={`ListItem ${darkTheme ? "DarkMode" : "LightMode"}`} key={index} onClick={async()=> {
-                        await axios.put(`${LOCAL_ENDPOINT}/addselftogroup`, {
+                        await axios.put(`${DEPLOYED_ENDPOINT}/addselftogroup`, {
                                 chatId: group._id,
                                 userId: userData._id,
                         },config);

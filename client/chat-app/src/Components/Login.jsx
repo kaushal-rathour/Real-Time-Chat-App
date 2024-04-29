@@ -69,10 +69,10 @@ export default function Login() {
             <form className="LoginBox" onSubmit={isSignUp ? signUpHandler : loginHandler} method="POST">
                 {loading && <Spin size="small" />}
                 <p className="LoginBoxText">{isSignUp ? "Create a new account" : "Login to your account"}</p>
-                {isSignUp && (<TextField label="Name" type="text" variant="outlined" name="name" onChange={onChangeHandler} required />)}
-                {isSignUp && (<TextField label="Email" type="email" variant="outlined" name="email" onChange={onChangeHandler} required />)}
-                <TextField label="Username" className="username" type="text" variant="outlined" name="username" onChange={onChangeHandler} required />
-                <TextField label="Password" variant="outlined" name="password" type="password" onChange={onChangeHandler} required />
+                {isSignUp && (<TextField  autoComplete="off" label="Name" type="text" variant="outlined" name="name" onChange={onChangeHandler} required />)}
+                {isSignUp && (<TextField autoComplete="off" label="Email" type="email" variant="outlined" name="email" onChange={onChangeHandler} required />)}
+                <TextField autoComplete="off" label="Username" className="username" type="text" variant="outlined" name="username" onChange={onChangeHandler} required />
+                <TextField autoComplete="off" label="Password" variant="outlined" name="password" type="password" onChange={onChangeHandler} required />
                 <Button variant="contained" type="submit" disabled={loading}>{isSignUp ? "Sign Up" : "Login"}</Button>
                 <a className="LoginSwitch" variant="text" onClick={toggleSignup}>
                     {isSignUp ? "Already registered? Login" : `Not registered yet? Sign Up`}
