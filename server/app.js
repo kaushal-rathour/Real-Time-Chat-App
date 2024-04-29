@@ -90,9 +90,6 @@ async function main() {
   console.log("Database is ready!");
 }
 
-const LOCAL_ORIGIN = "http://localhost:5173";
-const DEPLOYED_ORIGIN = "https://www.q-startechnologies.com"
-
 const io = require("socket.io")(server, {
   cors: {
     origin: "*",
@@ -100,34 +97,35 @@ const io = require("socket.io")(server, {
   pingTimeout: 60000,
 });
 
-io.on("connection", async (socket)=> {
-  const {token} = socket.handshake.query;
-    // Authenticate user
-    let user = await decodeUser(token);
-    console.log("Connection Established: " + user._id);
-    if(!user) {
-      socket.emit("error", { code: 401, message: "User Not Authorized" });
-      return;
-    }
-    // Send Message
-    socket.on("sendMessage", asyncHandler(async(data)=> {
-      const { chatId, content } = data;
+io.on("connection", async (socket) => {
+  console.log("Connection Established");
+
+  socket.on("sendMessage", asyncHandler(async (data) => {
+      const { chatId, content, token } = data;
       try {
-          if (!content || !chatId ) {
+          if (!content || !chatId) {
               socket.emit("error", { code: 400, message: "Insufficient Data" });
               return;
           }
-          
+
+          // Authenticate user
+          let user = await decodeUser(token);
+          if (!user) {
+              socket.emit("error", { code: 401, message: "User Not Authorized" });
+              return;
+          }
+
           if (!mongoose.Types.ObjectId.isValid(chatId)) {
               socket.emit("error", { code: 400, message: "Invalid Chat ID" });
               return;
           }
-  
+
           let chat = await Chat.findById(chatId);
           if (!chat) {
               socket.emit("error", { code: 404, message: "Chat not found" });
               return;
           }
+
           const participants = chat.participants;
           const receiver = participants.find(participant => participant.toString() !== user._id.toString());
           const newMessage = new Message({
@@ -136,7 +134,7 @@ io.on("connection", async (socket)=> {
               content: content,
               chat: chatId
           });
-          
+
           let response = await newMessage.save();
           chat.latestMessage = response._id;
           await chat.save();
@@ -148,21 +146,26 @@ io.on("connection", async (socket)=> {
   }));
 
   // Fetch Messages
-  socket.on("fetchMessage", async (data) => {
-    try {
-        const { chatId } = data;
-        if (!mongoose.Types.ObjectId.isValid(chatId)) {
-            socket.emit("error", { code: 400, message: "Invalid Chat ID" });
-            return;
-        }
-        let messages = await Message.find({ chat: chatId }).populate("sender");
-        socket.emit("messages", messages);
-    } catch (error) {
-        // console.error("Error fetching messages:", error);
-        socket.emit("error", { code: 500, message: "Internal Server Error" });
-    }
-});
+  socket.on("fetchMessage", asyncHandler(async (data) => {
+      try {
+          const { chatId, token } = data;
+          if (!mongoose.Types.ObjectId.isValid(chatId)) {
+              socket.emit("error", { code: 400, message: "Invalid Chat ID" });
+              return;
+          }
 
+          let user = await decodeUser(token);
+          if (!user) {
+              socket.emit("error", { code: 401, message: "User Not Authorized" });
+              return;
+          }
+
+          let messages = await Message.find({ chat: chatId }).populate("sender");
+          socket.emit("messages", messages);
+      } catch (error) {
+          socket.emit("error", { code: 500, message: "Internal Server Error" });
+      }
+  }));
 });
 
 

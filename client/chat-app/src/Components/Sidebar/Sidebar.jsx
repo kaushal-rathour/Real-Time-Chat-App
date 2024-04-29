@@ -29,7 +29,9 @@ export default function Sidebar () {
                 <div className="SidebarHeaderLeft">
                     
                         <IconButton>
-                            <AccountCircleIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`}/> 
+                            <AccountCircleIcon className={`${darkTheme? "DarkModeIcon": "LightModeIcon"}`} onClick={()=> {
+                                navigate("/welcome")
+                            }}/> 
                         </IconButton>
 
                         <IconButton  className="ShowChatToggle" onClick={()=> dispatch( toggleShowChat())}>

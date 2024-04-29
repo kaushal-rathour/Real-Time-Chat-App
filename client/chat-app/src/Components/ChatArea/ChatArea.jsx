@@ -21,6 +21,7 @@ export default function ChatArea() {
     const [loading, setLoading] = useState(false);
     const queryParams = new URLSearchParams(location.search);
     const userData = JSON.parse(localStorage.getItem("userData"));
+    const {token} = userData;
     let [messages, setMessages] = useState([]);
     let [alert, setAlert] = useState(null);
     let timeStamp = "";
@@ -34,10 +35,11 @@ export default function ChatArea() {
     const onChangeHandler = (event) => {
         setContent(event.target.value);
     };
+    
     const sendMessage = async () => {
         try {
             setLoading(true);
-            socket.emit("sendMessage", { chatId, content });
+            socket.emit("sendMessage", { chatId, content, token });
             setLoading(false);
             setContent("");
         } catch (error) {
@@ -51,18 +53,19 @@ export default function ChatArea() {
         });
     }, []);
     useEffect(() => {
-        const fetchMessages = async () => {
-            try {
-                socket.emit("fetchMessage", { chatId });
-                socket.on("messages", (data) => {
-                    setMessages(data);
-                });
-            } catch (error) {
-                setAlert({ type: 'error', message: 'Failed to fetch messages' });
-            }
-        };
+        const fetchMessages = () => {
+        try {
+            socket.emit("fetchMessage", { chatId, token });
+            socket.on("messages", (data) => {
+                setMessages(data);
+            });
+        } catch (error) {
+            setAlert({ type: 'error', message: 'Failed to fetch messages' });
+        }
+    };
         fetchMessages();
-    }, [chatId, refresh, messages]);
+    });
+    
     useEffect(() => {
         const scrollToBottom = () => {
             if (scrollableRef.current) {

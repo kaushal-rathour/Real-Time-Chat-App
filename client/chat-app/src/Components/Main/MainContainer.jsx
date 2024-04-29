@@ -16,6 +16,17 @@ export default function MainContainer ({socket}) {
             navigate("/");
         }
     },[userData]); 
+    useEffect(()=> {
+      console.log("App Re- Rendered");
+      if (userData) {
+          socket.connect();
+          
+          return () => {
+            socket.disconnect();
+          };
+        
+    };
+    },[userData]);
     return(
         <div className="MainContainer" >
             <Sidebar/>
