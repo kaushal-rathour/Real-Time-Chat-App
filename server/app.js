@@ -95,7 +95,7 @@ const DEPLOYED_ORIGIN = "https://www.q-startechnologies.com"
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: DEPLOYED_ORIGIN,
+    origin: "*",
   },
   pingTimeout: 60000,
 });
