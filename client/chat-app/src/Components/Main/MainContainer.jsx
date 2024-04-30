@@ -14,10 +14,10 @@ export default function MainContainer ({socket}) {
         if(!userData) {
             console.log("User Not Authenticated");
             navigate("/");
+            return;
         }
-    },[userData]); 
+    }); 
     useEffect(()=> {
-      console.log("App Re- Rendered");
       if (userData) {
           socket.connect();
           
