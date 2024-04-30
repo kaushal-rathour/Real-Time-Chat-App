@@ -5,18 +5,20 @@ import CreateGroups from "../CreateGroups.jsx"
 import "./MainContainer.css"
 import User from "../User.jsx"
 import Groups from "../Groups.jsx"
-import { Route, Routes, useNavigate } from "react-router-dom"
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom"
 import { useEffect, useState } from "react"
+import PageNotFound from "../PageNotFound.jsx"
 export default function MainContainer ({socket}) {
     const userData = JSON.parse(localStorage.getItem("userData"));
     const navigate = useNavigate();
-    useEffect(()=> {
-        if(!userData) {
+    
+    if(!userData) {
+        useEffect(()=> {
             console.log("User Not Authenticated");
             navigate("/");
-            return;
-        }
-    }); 
+        })
+        return;
+    } 
     useEffect(()=> {
       if (userData) {
           socket.connect();
@@ -36,6 +38,7 @@ export default function MainContainer ({socket}) {
                     <Route path="/users" element={<User />} />
                     <Route path="/groups" element={<Groups />} />
                     <Route path="/groups/new" element={<CreateGroups />} />
+                    <Route path="/*" element={<PageNotFound/>}/>
                 </Routes>
         </div>
     )
